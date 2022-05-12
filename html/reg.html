@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../js/axios.js"></script>
+  </head>
+ 
+  <body>
+      <h2>欢迎注册</h2>
+    <input type="text" name="" id="" />
+    <br>
+    <input type="text" name="" id="" />
+    <br>
+    <input type="button" name="" id="" value="注册" />
+
+    <script>
+      // 1-2
+      let ipts = document.querySelectorAll("input");
+      ipts[2].onclick = function () {
+        //1-3 参数
+        let username = ipts[0].value;
+        let password = ipts[1].value;
+        // 1-4
+        let loginAPI = "http://jx.xuzhixiang.top/ap/api/login.php";
+        //params 不要拼错 固定
+        let promise = axios.get(loginAPI, {
+          params: {
+            username,
+            password: password,
+          },
+        });
+        //1-5
+        promise.then(function (r) {
+          //r.data才是服务器 返回的数据--固定
+          console.log(r.data);
+          // code 1注册成  -  注册失败
+          // msg  提示信息
+          //   解构赋值
+          let { code, msg, data } = r.data;
+          console.log(code, msg);
+          alert(msg);
+          if (code == 1) {
+            //登录成的话--data中有用户id--需要在index中使用--存入本地
+            console.log(data.id);
+            // 存入本地
+            localStorage.setItem("id", data.id);
+            //加密的密码 =登录后服务器返回--登录令牌---身份的象征
+            localStorage.setItem("token", data.token);
+
+            //   跳转到 登录页面
+            location.href = "login.html";
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "title": "轮播图1",
+    "linkurl": "",
+    "imgurl": "https://static.asus.com.cn/store/20220417/19415551101100.jpg",
+    "type": 100,
+    "desc": "我只是一个描述",
+    "status":0
+  },
+
+  {
+    "id": 2,
+    "title": "轮播图2",
+    "linkurl": "",
+    "imgurl": "https://static.asus.com.cn/store/20220417/19415551101100.jpg",
+    "type": 101,
+    "desc": "我只是一个描述",
+    "status":1
+  },
+
+  {
+    "id": 3,
+    "title": "轮播图3",
+    "linkurl": "",
+    "imgurl": "https://static.asus.com.cn/store/20220417/19415551101100.jpg",
+    "type": 102,
+    "desc": "我只是一个描述",
+    "status":2
+  },
+
+  {
+    "id": 4,
+    "title": "轮播图4",
+    "linkurl": "",
+    "imgurl": "https://static.asus.com.cn/store/20220417/19415551101100.jpg",
+    "type": 103,
+    "desc": "我只是一个描述",
+    "status":3
+  }
+]

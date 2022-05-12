@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <button class="reg">注册</button>
+    <button class="login">登录</button>
+    <button class="addgoods">添加商品</button>
+    <button class="getgoods">获取商品</button>
+    <!-- 添加商品 -->
+    <script>
+      $(".reg").click(function () {
+        $.ajax({
+          url: `http://jx.xuzhixiang.top/ap/api/reg.php?username=张三丰&password=123456`,
+          success: (res) => {
+            console.log(res);
+          },
+        });
+      });
+      $(".login").click(function () {
+        $.ajax({
+          url: `http://jx.xuzhixiang.top/ap/api/login.php?username=张三丰&password=123456`,
+          success: (res) => {
+            console.log(res);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("uid", res.data.id);
+          },
+        });
+      });
+      $(".addgoods").click(function () {
+        $.ajax({
+          url: `http://jx.xuzhixiang.top/ap/api/goods/goods-add.php?http://www.superslide2.com/demo/images/pic2.jpg&pname=大华主席&pprice=100&pdesc=yyds&uid=${localStorage.getItem(
+            "token"
+          )}`,
+          success: (res) => {
+            console.log(res);
+          },
+        });
+      });
+      $(".getgoods").click(function () {
+        $.ajax({
+          url: `http://jx.xuzhixiang.top/ap/api/allproductlist.php?pagesize=20&pagenum=0&uid=${localStorage.getItem(
+            "uid"
+          )}`,
+          success: (res) => {
+            console.log(res);
+            localStorage.setItem("uid", res.data.id);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

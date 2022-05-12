@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/dataObj.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <style>
+      img{
+        width: 200px;
+      }
+      ul{
+        list-style: none;
+       
+      }
+    </style>
+</head>
+<body>
+   <!-- 留言列表 -->
+   <h2>我的购物车</h2>
+   <img src="" alt="">
+     <ul id="lylist">
+       <li>
+         <p>购物车内容</p>
+         <button>收藏购物车内容</button>
+       </li>
+     </ul>
+   
+     </ul>
+     <!-- 收藏列表 -->
+     <h2>收藏</h2>
+     <ul id="sclist">
+       
+     </ul>
+    <button class="getgoods">获取商品</button>
+<script>
+   
+    var arr=dataObj.data
+    console.log(arr);
+      var cartArr=[]
+      function loadLyList(){
+        let str=""
+        arr.forEach(key => {
+          str=str+
+          `
+          <li>
+        <img src="${key.imgsrc}" alt="" >
+        <p>${key.name}</p>
+        <p>${key.Name}</p>
+        <p>${key.ID}</p>
+        <button onclick="scBtnClick(${key.ID})">加入购物车</button>
+      </li>
+          
+          `
+        });
+        document.querySelector("#lylist").innerHTML=str
+      }loadLyList()
+// 添加收藏
+function scBtnClick(ID){
+  let has=cartArr.some((ID)=>key.ID==ID)
+  if(has==true){
+    alert("已经收藏了")
+
+  }else{
+    console.log("点击了收藏按钮");
+    let lyObj=arr.find((key)=>key.ID==ID)
+    console.log(lyObj);
+    cartArr.push(lyObj)
+    loadSCList()
+  }
+}
+// 加载收藏列表
+function loadSCList(){
+  let str=""
+  cartArr.forEach((key)=>{
+    str=str+`
+  <li>
+        <img src="${key.imgsrc}" alt="">
+        <p>${key.Name}</p>
+        <p>${key.name}</p>
+        <p>${key.ID}</p>
+        <button onclick="cancleBtnClick(${key.ID})">取消收藏</button>
+      </li>
+    
+    `
+
+  })
+  // 拼接多个li收藏列表
+  document.querySelector("#sclist").innerHTML=str
+}
+// 取消收藏
+function cancleBtnClick(ID){
+  cartArr=cartArr.filter((key)=>key.ID!=ID)
+  loadSCList()
+}
+   
+
+
+$(".getgoods").click(function () {
+        $.ajax({
+          url: `http://jx.xuzhixiang.top/ap/api/allproductlist.php?pagesize=20&pagenum=0&uid=${localStorage.getItem(
+            "uid"
+          )}`,
+          success: (res) => {
+            console.log(res);
+            localStorage.setItem("uid", res.data.id);
+          },
+        });
+      });
+  
+</script>      
+</body>
+</html>

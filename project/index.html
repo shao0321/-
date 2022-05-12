@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <style>
+      ul {
+        list-style: none;
+      }
+      #nav {
+        list-style: none;
+        width: 100%;
+      }
+      #nav li {
+        width: 100px;
+        line-height: 40px;
+        height: 80px;
+        float: left;
+        text-align: center;
+      }
+      #nav li a {
+        text-decoration: none;
+      }
+      .ul_goods li img {
+        width: 200px;
+        height: 200px;
+      }
+      .ul_goods {
+        width: 100%;
+        height: 300px;
+        display: flex;
+      }
+      .ul_goods h4 {
+        text-align: center;
+      }
+      .ul_goods p {
+        text-align: center;
+      }
+      .ul_goods span {
+        margin-left: 85px;
+      }
+      .ul_goods .goods {
+        width: 200px;
+        height: 100%;
+      }
+      .ul_goods li {
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="nav">
+      <li>11</li>
+      <li>11</li>
+      <li>11</li>
+      <li>11</li>
+      <li>11</li>
+      <li>11</li>
+      <li>11</li>
+    </ul>
+    <ul class="ul_goods">
+      <li>
+        <div class="goods">
+          <img
+            src="https://static.asus.com.cn/store/20220417/19415551101100.jpg"
+            alt=""
+          />
+          <h4>商品介绍</h4>
+          <p>价钱</p>
+          <span>打折</span>
+        </div>
+      </li>
+      <li>
+        <div class="goods">
+          <img
+            src="https://static.asus.com.cn/store/20220417/19415551101100.jpg"
+            alt=""
+          />
+          <h4>商品介绍</h4>
+          <p>价钱</p>
+          <span>打折</span>
+        </div>
+      </li>
+      <li>
+        <div class="goods">
+          <img
+            src="https://static.asus.com.cn/store/20220417/19415551101100.jpg"
+            alt=""
+          />
+          <h4>商品介绍</h4>
+          <p>价钱</p>
+          <span>打折</span>
+        </div>
+      </li>
+      <li>
+        <div class="goods">
+          <img
+            src="https://static.asus.com.cn/store/20220417/19415551101100.jpg"
+            alt=""
+          />
+          <h4>商品介绍</h4>
+          <p>价钱</p>
+          <span>打折</span>
+        </div>
+      </li>
+    </ul>
+    <script>
+      getNav();
+      function getNav() {
+        $.getJSON("./data/nav.json").then((res) => {
+          $("#nav").empty();
+          console.log(res);
+          for (var i = 0; i < res.length; i++) {
+            $("#nav").append(
+              `<li><a href="${res[i].linkurl}">${res[i].title}</a></li>`
+            );
+          }
+        });
+      }
+      //   获取轮播数据
+      getBanner();
+      function getBanner() {
+        $.getJSON("./data/banner.json").then((res) => {
+          console.log(res);
+        });
+      }
+      // 获取商品推荐信息
+      getRecomment();
+      function getRecomment() {
+        $.getJSON("./data/recomment.json").then((res) => {
+          $(".ul_goods").empty();
+          console.log(res);
+          for (var i = 0; i < res.length; i++) {
+            $(".ul_goods").append(` <li><a href="res[i].linkurl">
+        <div class="goods">
+          <img src="${res[i].imgurl}" alt="">
+          <h4>${res[i].title}</h4>
+          <p>${res[i].desc}</p>
+          <span>${res[i].status == 0 ? "五折" : ""}
+            ${res[i].status == 1 ? "六折" : ""}
+            ${res[i].status == 2 ? "七折" : ""}
+            ${res[i].status == 3 ? "八折" : ""} </span>
+        </div></a>
+      </li>`);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
